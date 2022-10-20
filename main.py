@@ -14,14 +14,12 @@ def runtime(f):
 #主程序
 @runtime
 def main():
-    tsp=TSP()
-    tsp.init()
-    tsp.select_pop2(tsp.pop)
     pass
-    # tsp=TSP(0.54,0.06,73)#最三个最佳的参数
-    # tsp.init()
-    # dis_list,pop_list=tsp.evolution(500)
-    # print("处理图片")
+    tsp=TSP(0.54,0.06,100)#最三个最佳的参数
+    # tsp=TSP()
+    tsp.init()
+    dis_list,pop_list=tsp.evolution(1000)
+    print("处理图片")
     # drawLine(dis_list)
     # lastDraw(pop_list[-1],dis_list[-1])
     # popDraw(pop_list,dis_list,200)

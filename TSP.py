@@ -53,7 +53,7 @@ class TSP():
             gf.append(dis)
         return gf
     
-    #交叉
+    #交叉:单点交叉
     def cross(self,parent1:list,parent2:list):#交叉p1,p2的部分基因
         '''参数p1,p2是待交叉的两个基因'''
         if random()>self.c_rate: #如果此时生成的概率大于交叉率,则不交叉
@@ -71,7 +71,7 @@ class TSP():
             p1len+=1
         return newGene
 
-    #翻转基因,翻转基因i到j之间的基因片段
+    #反转基因,反转基因i到j之间的基因片段
     def reverse_gen(self,gen:list,i:int,j:int):
         if i>=j:    #错误顺序
             return gen
@@ -82,7 +82,7 @@ class TSP():
         newGene=gen[0:i]+tempGene+gen[j:self.city.city_size]
         return newGene
 
-    #变异
+    #变异:反转基因变异
     def mutate(self,gen:list):
         if random()>self.m_rate:#如果大于变异率,则不变异
             return gen
@@ -90,25 +90,29 @@ class TSP():
         index2=randint(index1,self.city.city_size-1)#还是生成随机片段
         newGene=self.reverse_gen(gen,index1,index2)#利用翻转基因来变异
         return newGene
-
+    ## 淘汰算法
     #选择种群,优胜劣汰法则,好的基因保留下来,差的基因进行交叉和变异
-    #选出fitness的最大值和中位数,低于中位数的基因,就和最好的基因交叉,然后变异
+    #选出fitness的最大值和平均数,低于平均数的基因,就和最好的基因交叉,然后变异
     def selectPop(self,pop:list):
         best_f_index=self.fitness.index(max(self.fitness))#最大值的位置
-        av=median(self.fitness)
+        av=sum(self.fitness)/len(self.fitness)
         for i in range(self.pop_size):
             if i!=best_f_index and self.fitness[i]<av:
                 pi=self.cross(pop[best_f_index],pop[i])
                 pi=self.mutate(pi)
                 pop[i]=pi
         return pop
-    # TODO 适应度比例算子
-    def select_pop2(self,pop:list):#换选择算子
+    #轮盘赌:按概率选择算子
+    
+    def selectPop2(self,pop:list):#换选择算子
         probility=[]
         for i in range(len(self.fitness)):
             probility.append(self.fitness[i] / sum(self.fitness))
-        print(probility)
-        print(choice(self.pop_size,probility))
+        index_list=choice(self.pop_size,probility)
+        choispop=[]
+        for i in index_list:
+            choispop.append(pop[i])
+        return choispop
         
 
     #主程序,迭代进化种群
@@ -134,8 +138,8 @@ class TSP():
             if local_best_dist<self.best_dist:#如果出现了更优化的解,则替换
                 self.best_dist=local_best_dist
                 self.best_gen=local_best_gen
-            else:
-                self.pop[worst_f_index]=self.best_gen#如果没有更优解,就把当前best当成全局最优,并用最优替换最差的
+            # else:
+            #     self.pop[worst_f_index]=self.best_gen#如果没有更优解,就把当前best当成全局最优,并用最优替换最差的
             #主遗传程序,随机交叉,变异:选择种群-计算适应度-交叉-变异
             self.pop=self.selectPop(self.pop)
             self.fitness=self.getFitness(self.pop)

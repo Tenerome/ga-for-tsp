@@ -2,14 +2,6 @@ from copy import deepcopy
 from os import system
 from random import random
 
-def median(fitness:list):
-    '''求中位数'''
-    lf=deepcopy(fitness)
-    lf.sort()
-    half=len(lf)//2
-    mid=(lf[half]+lf[-half-1])/2
-    return mid  
-
 def picsTogif():
     '''将保存的图片转成视频'''
     system('cd ./pics/ && ffmpeg -r 5 -i %d.png -vf palettegen palette.png && ffmpeg -y -r 5 -i %d.png -i palette.png -lavfi paletteuse output.gif')
@@ -26,8 +18,9 @@ def choice(pop_size:int,probility:list):
     pop_size:种群大小,也是目标size
     probility:概率列表
     '''
-    chospop=[]
-    for i in range(pop_size):
-        if random()<=probility[i]:
-            chospop.append(i)
-    return chospop
+    choispop=[]
+    while len(choispop)<pop_size:
+        for i in range(pop_size):
+            if random()<=probility[i]:
+                choispop.append(i)
+    return choispop
