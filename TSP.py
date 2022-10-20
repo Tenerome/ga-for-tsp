@@ -101,19 +101,7 @@ class TSP():
                 pi=self.cross(pop[best_f_index],pop[i])
                 pi=self.mutate(pi)
                 pop[i]=pi
-        return pop
-    #轮盘赌:按概率选择算子
-    
-    def selectPop2(self,pop:list):#换选择算子
-        probility=[]
-        for i in range(len(self.fitness)):
-            probility.append(self.fitness[i] / sum(self.fitness))
-        index_list=choice(self.pop_size,probility)
-        choispop=[]
-        for i in index_list:
-            choispop.append(pop[i])
-        return choispop
-        
+        return pop        
 
     #主程序,迭代进化种群
     def evolution(self,ga_num:int=300):#尽量多个模块,多用参数和返回值,不要把功能都堆在一个函数中
