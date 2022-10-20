@@ -16,17 +16,20 @@ def runtime(f):
 def main():
     tsp=TSP()
     tsp.init()
-    dis_list,pop_list=tsp.evolution(200)
-    print("正在处理图片...")
-    drawLine(dis_list)
-    popDraw(pop_list,dis_list,200)
-    lastDraw(pop_list[-1],dis_list[-1])
-    picsTogif()
-    print("正在保存数据...")
-    writeFile(dis_list,r'./data/list.ini')
-    writeFile(pop_list,r'./data/pop.ini')
-    print("执行完毕")
-
+    tsp.select_pop2(tsp.pop)
+    pass
+    # tsp=TSP(0.54,0.06,73)#最三个最佳的参数
+    # tsp.init()
+    # dis_list,pop_list=tsp.evolution(500)
+    # print("处理图片")
+    # drawLine(dis_list)
+    # lastDraw(pop_list[-1],dis_list[-1])
+    # popDraw(pop_list,dis_list,200)
+    # picsTogif()
+    # print("保存数据")
+    # writeFile(dis_list,r'./data/list.ini')
+    # writeFile(pop_list,r'./data/pop.ini')
+    # print("执行完毕")
 
 if __name__=="__main__":
     main()

@@ -103,11 +103,14 @@ class TSP():
                 pop[i]=pi
         return pop
     # TODO 适应度比例算子
-    # def select_pop2(self, pop):#换选择算子
-    #     probility = self.fitness / sum(self.fitness)
-    #     idx = np.random.choice(np.arange(self.pop_size), size=self.pop_size, replace=True, p=probility)
-    #     n_pop = pop[idx, :]
-    #     return n_pop
+    def select_pop2(self,pop:list):#换选择算子
+        probility=[]
+        for i in range(len(self.fitness)):
+            probility.append(self.fitness[i] / sum(self.fitness))
+        print(probility)
+        print(choice(self.pop_size,probility))
+        
+
     #主程序,迭代进化种群
     def evolution(self,ga_num:int=300):#尽量多个模块,多用参数和返回值,不要把功能都堆在一个函数中
         '''ga_num:最大迭代次数,默认为300  
@@ -133,7 +136,7 @@ class TSP():
                 self.best_gen=local_best_gen
             else:
                 self.pop[worst_f_index]=self.best_gen#如果没有更优解,就把当前best当成全局最优,并用最优替换最差的
-            #主遗传程序:选择种群-计算适应度-交叉-变异
+            #主遗传程序,随机交叉,变异:选择种群-计算适应度-交叉-变异
             self.pop=self.selectPop(self.pop)
             self.fitness=self.getFitness(self.pop)
             for j in range(self.pop_size):
