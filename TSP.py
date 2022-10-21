@@ -104,8 +104,8 @@ class TSP():
         return pop        
 
     #主程序,迭代进化种群
-    def evolution(self,ga_num:int=300):#尽量多个模块,多用参数和返回值,不要把功能都堆在一个函数中
-        '''ga_num:最大迭代次数,默认为300  
+    def evolution(self,ga_num:int=500):#尽量多个模块,多用参数和返回值,不要把功能都堆在一个函数中
+        '''ga_num:最大迭代次数,默认为500  
 
            返回值是最优基因列表和最优距离列表,用来绘图
         '''
@@ -115,20 +115,17 @@ class TSP():
 
         for i in range(self.ga_num):
             best_f_index=self.fitness.index(max(self.fitness))#适应度最好的
-            worst_f_index=self.fitness.index(min(self.fitness))#适应度最差的
             local_best_gen=self.pop[best_f_index]#局部最优基因
             local_best_dist=self.city.genDistance(local_best_gen)#局部最短距离 
-
-            self.best_gen=local_best_gen
+            if i==0:
+                self.best_gen=local_best_gen
             self.best_dist=self.city.genDistance(self.best_gen)
 
             #比较替换
             if local_best_dist<self.best_dist:#如果出现了更优化的解,则替换
-                self.best_dist=local_best_dist
                 self.best_gen=local_best_gen
-            # else:
-            #     self.pop[worst_f_index]=self.best_gen#如果没有更优解,就把当前best当成全局最优,并用最优替换最差的
-            #主遗传程序,随机交叉,变异:选择种群-计算适应度-交叉-变异
+
+            #主遗传程序:淘汰种群-随机交叉,变异:选择种群-计算适应度-交叉-变异
             self.pop=self.selectPop(self.pop)
             self.fitness=self.getFitness(self.pop)
             for j in range(self.pop_size):
@@ -139,7 +136,7 @@ class TSP():
             
             #每次迭代完后
             self.best_dist=self.city.genDistance(self.best_gen)#记录最短距离
-            print("迭代%d次,最短距离:%s" % (i,self.best_dist))
+            # print("迭代%d次,最短距离:%s" % (i,self.best_dist))
             best_dis_list.append(self.best_dist) #添加折线图的y值
             best_pop_list.append(self.best_gen) #添加基因,用于画图
 

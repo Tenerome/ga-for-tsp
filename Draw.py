@@ -31,8 +31,8 @@ def genDraw(gen:list):
     return plt
 
 def popDraw(best_pop_list:list,best_dis_list:list,picnum:int):
-    '''根据种群画图  
-
+    '''根据种群画图  \n
+        参数picnum是绘制gif所用的图片数量\n
         picnum必须不大于迭代次数
     '''
     #加个判断

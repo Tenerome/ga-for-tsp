@@ -14,20 +14,19 @@ def runtime(f):
 #主程序
 @runtime
 def main():
-    pass
-    tsp=TSP(0.54,0.06,100)#最三个最佳的参数
-    # tsp=TSP()
+    print("程序开始,迭代进化..")
+    tsp=TSP(0.62,0.063,90)#最三个最佳的参数
     tsp.init()
-    dis_list,pop_list=tsp.evolution(1000)
-    print("处理图片")
-    # drawLine(dis_list)
-    # lastDraw(pop_list[-1],dis_list[-1])
-    # popDraw(pop_list,dis_list,200)
-    # picsTogif()
-    # print("保存数据")
-    # writeFile(dis_list,r'./data/list.ini')
-    # writeFile(pop_list,r'./data/pop.ini')
-    # print("执行完毕")
+    dis_list,pop_list=tsp.evolution()
+    print("迭代完毕,正在处理图片..")
+    drawLine(dis_list)
+    lastDraw(pop_list[-1],dis_list[-1])
+    popDraw(pop_list,dis_list,200)
+    picsTogif()
+    print("图片处理完毕")
+    writeFile(dis_list,r'./data/list.ini')
+    writeFile(pop_list,r'./data/pop.ini')
+    print("保存数据完毕")
 
 if __name__=="__main__":
     main()
