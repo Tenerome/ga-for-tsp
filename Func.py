@@ -1,4 +1,3 @@
-from copy import deepcopy
 from os import system
 from random import random
 
