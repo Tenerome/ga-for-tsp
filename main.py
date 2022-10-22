@@ -21,7 +21,7 @@ def main():
     print("迭代完毕,正在处理图片..")
     drawLine(dis_list)
     lastDraw(pop_list[-1],dis_list[-1])
-    popDraw(pop_list,dis_list,200)
+    popDraw(pop_list,dis_list,300)
     picsTogif()
     print("图片处理完毕")
     writeFile(dis_list,r'./data/list.ini')

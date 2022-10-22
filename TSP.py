@@ -49,8 +49,8 @@ class TSP():
         for i in range(len(pop)):
             gen=pop[i] #取一个基因
             dis=self.city.genDistance(gen)
-            dis=self.best_dist/dis #适应度用当前最优距离/该个体的距离,比值越接近1,适应度越高
-            gf.append(dis)
+            fit=self.best_dist/dis #适应度用当前最优距离/该个体的距离,比值越接近1,适应度越高
+            gf.append(fit)
         return gf
     
     #交叉:单点交叉

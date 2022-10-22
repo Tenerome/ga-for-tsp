@@ -20,8 +20,8 @@ class City():
         arr=[file[i].strip('\n').split('\t') for i in range(len(file))]#split去除中间的,strip去前后的
         for i in arr:
             self.city_name.append(i[0])
-            self.city_x.append(float(i[1]))
-            self.city_y.append(float(i[2]))
+            self.city_x.append(eval(i[1]))
+            self.city_y.append(eval(i[2]))
         self.city_size=len(arr)
 
     #计算两个城市之间的距离,这里用欧式距离,即两个点之间的直线距离
