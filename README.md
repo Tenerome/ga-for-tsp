@@ -16,7 +16,6 @@ python main.py
 
 ### 效果展示
 
-#### 主程序
 动态化
 ![gif](pics/output.gif)
 收敛距离
