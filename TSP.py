@@ -136,7 +136,6 @@ class TSP():
             
             #每次迭代完后
             self.best_dist=self.city.genDistance(self.best_gen)#记录最短距离
-            # print("迭代%d次,最短距离:%s" % (i,self.best_dist))
             best_dis_list.append(self.best_dist) #添加折线图的y值
             best_pop_list.append(self.best_gen) #添加基因,用于画图
 
